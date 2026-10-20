@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3AM Reruns</title>
+<meta name="theme-color" content="#14110f">
+<link rel="stylesheet" href="book.css">
+</head><body>
+<div id="stage"><div id="book" aria-live="polite"></div></div>
+<button id="prev" class="nav" aria-label="Previous page">&#8249;</button>
+<button id="next" class="nav" aria-label="Next page">&#8250;</button>
+<div id="bar">
+  <span class="l"><button id="home" aria-label="Home">&#8962;</button><button id="toc" aria-label="Contents">&#9776;</button></span>
+  <span id="count"></span>
+  <button id="mute" aria-label="Mute music">&#9835;</button>
+</div>
+<div id="menu" hidden><div class="sheet"><h2>Chapters</h2><div class="wheel" id="chapters"></div></div></div>
+<audio id="music" src="audio/calmant.mp3" loop preload="none"></audio>
+<script src="poems.js"></script>
+<script src="book.js"></script>
+</body></html>
