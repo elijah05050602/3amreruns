@@ -670,3 +670,12 @@ window.THANKS = [
  "You're stronger than the hour makes you feel.",
  "Until the next 3 a.m. Be kind to yourself."
 ];
+
+// A note from the author, shown before the Thank-you page.
+window.NOTE_TITLE = "From my heart";
+window.NOTE = [
+ "I made this with my whole heart, and I'm not asking for anything in return.",
+ "If a line here found you, I'd love for you to follow @3amreruns and watch the reels that speak to you.",
+ "Every follow and every view tells me a real person felt something. That is what lets me know I can keep going.",
+ "Thank you for letting me touch your heart, even a little."
+];

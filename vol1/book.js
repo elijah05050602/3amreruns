@@ -37,6 +37,7 @@ CH.forEach(function(ch,ci){
     });
   });
 });
+(window.NOTE||[]).length&&defs.push({kind:'note'});
 (window.THANKS||[]).length&&defs.push({kind:'thanks'});
 defs.push({kind:'end'});
 var lastBody=0;defs.forEach(function(d,i){if(d.kind==='line')lastBody=i});var FIRST=3;defs.forEach(function(d,i){if(d.kind==='chapter'&&FIRST===3)FIRST=i});lastBody=lastBody-FIRST+1; // first poem page index
@@ -69,6 +70,9 @@ defs.forEach(function(d,i){
     pg.innerHTML='<h1>'+esc(d.p.title)+'</h1>';
   }else if(d.kind==='line'){
     pg.innerHTML='<div class="pic" data-src="'+d.img+'"></div><div class="shade"></div><div class="line"></div><div class="foot">'+esc(d.p.title)+' &middot; '+d.n+'/'+d.p.lines.length+'</div>';
+  }else if(d.kind==='note'){
+    pg.className+=' plain why';
+    pg.innerHTML='<h2>'+esc(window.NOTE_TITLE||'From my heart')+'</h2>'+window.NOTE.map(function(t){return '<p>'+esc(t)+'</p>'}).join('');
   }else if(d.kind==='thanks'){
     pg.className+=' plain why';
     pg.innerHTML='<h2>'+esc(window.THANKS_TITLE||'Thank you')+'</h2>'+window.THANKS.map(function(t){return '<p>'+esc(t)+'</p>'}).join('');
@@ -111,7 +115,7 @@ function render(){
   });
   var k=defs[cur].kind;count.textContent=(k==='line'||k==='title'||k==='chapter'||k==='section')?(cur-FIRST+1)+' / '+lastBody:'';
   bar.classList.toggle('on',cur>0);
-  document.body.classList.toggle('paper',['name','toc','why','thanks','end'].indexOf(defs[cur].kind)>=0);
+  document.body.classList.toggle('paper',['name','toc','why','note','thanks','end'].indexOf(defs[cur].kind)>=0);
   document.body.classList.toggle('onpic',defs[cur].kind==='line'||cur===0);
   load(cur);
   if(defs[cur].kind==='toc'&&typeof wToc!=='undefined')wToc.paint();
