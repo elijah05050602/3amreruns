@@ -178,6 +178,14 @@ a{color:inherit}
   .steps{text-align:left;width:fit-content;max-width:100%;margin-inline:auto}
   .cta{align-self:center}
 }
+.letter{background:#151d2b;padding-block:8px 80px}
+.letter .card{position:relative;max-width:560px;margin:0 auto;background:var(--paper);color:var(--ink);padding:34px 30px 30px;transform:rotate(-.8deg);box-shadow:6px 7px 0 0 var(--ink)}
+.letter .card::before{content:"";position:absolute;top:-11px;left:50%;width:90px;height:22px;margin-left:-45px;background:var(--lamp);opacity:.85;transform:rotate(2deg)}
+.letter .apt{font-family:var(--label);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#59606e;margin:0 0 10px}
+.letter h3{margin:0 0 14px;font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,6vw,2.4rem);line-height:1.05}
+.letter p{margin:0 0 12px;font-family:var(--display);font-size:1.28rem;line-height:1.4}
+.letter .sig{margin:18px 0 0;text-align:right;color:#a2600c;font-size:1.4rem}
+@media (max-width:420px){.letter .card{padding:30px 20px 24px}.letter p{font-size:1.18rem}}
 footer{padding-block:28px 34px;background:var(--ink);color:var(--mute);font-size:.84rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
@@ -262,6 +270,19 @@ footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
       <div class="row dim"><span>Price</span><span>Free</span></div>
     </div>
   </div>
+</section>
+
+<section class="letter gut" aria-labelledby="letter-h">
+  <article class="card">
+    <p class="apt">Taped to the lobby door</p>
+    <h3 id="letter-h">Before you go</h3>
+    <p>I make these at 3 a.m., when the building is quiet and sleep won't come. Every line started as something I needed to hear myself.</p>
+    <p>I'm not selling anything here. The book is free, and I made it with my whole heart.</p>
+    <p>All I ask in return is that you follow the page and watch the Reels that speak to you. Stay for the ones that hit close. Share one with someone who's still awake.</p>
+    <p>Every follow, every comment, every replay tells me these words reached someone. That's how I know I touched a heart tonight, and it's what keeps my light on so I can keep going.</p>
+    <p>If a line ever stayed with you, tell me. I'll be up.</p>
+    <p class="sig">3AM Reruns</p>
+  </article>
 </section>
 
 <footer class="gut">
