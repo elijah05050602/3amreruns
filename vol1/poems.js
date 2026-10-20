@@ -630,6 +630,426 @@ window.POEMS = [
   "img/30-05.jpg",
   "img/30-06.jpg"
  ]
+},
+{
+ "id": "31",
+ "theme": "Love",
+ "title": "No witness",
+ "lines": [
+  "Nobody tells you what love looks like",
+  "It's giving them the bigger half",
+  "Saying you're not hungry when you are",
+  "Driving them home, then back alone",
+  "They might never even notice",
+  "Real love doesn't need a witness"
+ ],
+ "images": [
+  "img/31-01.jpg",
+  "img/31-02.jpg",
+  "img/31-03.jpg",
+  "img/31-04.jpg",
+  "img/31-05.jpg",
+  "img/31-06.jpg"
+ ]
+},
+{
+ "id": "32",
+ "theme": "Heartbreak",
+ "title": "Learned on you",
+ "lines": [
+  "They'll do it all for someone new",
+  "The trips they said they couldn't take",
+  "The texts they said they couldn't send",
+  "You'll wonder what was wrong with you",
+  "Nothing was wrong with you",
+  "They just learned it on you"
+ ],
+ "images": [
+  "img/32-01.jpg",
+  "img/32-02.jpg",
+  "img/32-03.jpg",
+  "img/32-04.jpg",
+  "img/32-05.jpg",
+  "img/32-06.jpg"
+ ]
+},
+{
+ "id": "33",
+ "theme": "Self-worth",
+ "title": "Stop apologizing",
+ "lines": [
+  "Stop apologizing for existing",
+  "Sorry for asking, sorry for the text",
+  "Sorry for taking up space",
+  "Somebody taught you to be small",
+  "That lesson is over now",
+  "Take up the whole room"
+ ],
+ "images": [
+  "img/33-01.jpg",
+  "img/33-02.jpg",
+  "img/33-03.jpg",
+  "img/33-04.jpg",
+  "img/33-05.jpg",
+  "img/33-06.jpg"
+ ]
+},
+{
+ "id": "34",
+ "theme": "Discipline",
+ "title": "Your average day",
+ "lines": [
+  "Your life is your average day",
+  "Not your best one, not your worst",
+  "The morning you skip the walk",
+  "The night you scroll past midnight",
+  "Repeat it for ten years",
+  "Congratulations, that's your life"
+ ],
+ "images": [
+  "img/34-01.jpg",
+  "img/34-02.jpg",
+  "img/34-03.jpg",
+  "img/34-04.jpg",
+  "img/34-05.jpg",
+  "img/34-06.jpg"
+ ]
+},
+{
+ "id": "35",
+ "theme": "Love",
+ "title": "Worth it",
+ "lines": [
+  "I moved cities for you once",
+  "New job, no friends, wrong time zone",
+  "My mom asked if it was worth it",
+  "I told her to ask me later",
+  "Ten years later, you're still here",
+  "Yes, Mom. It was worth it."
+ ],
+ "images": [
+  "img/35-01.jpg",
+  "img/35-02.jpg",
+  "img/35-03.jpg",
+  "img/35-04.jpg",
+  "img/35-05.jpg",
+  "img/35-06.jpg"
+ ]
+},
+{
+ "id": "36",
+ "theme": "Heartbreak",
+ "title": "Just a song",
+ "lines": [
+  "You skip that one song now",
+  "You take the long way past their place",
+  "They took half your city with them",
+  "Take it back, one place at a time",
+  "Go there with people who stayed",
+  "Until it's just a song again"
+ ],
+ "images": [
+  "img/36-01.jpg",
+  "img/36-02.jpg",
+  "img/36-03.jpg",
+  "img/36-04.jpg",
+  "img/36-05.jpg",
+  "img/36-06.jpg"
+ ]
+},
+{
+ "id": "37",
+ "theme": "Self-worth",
+ "title": "That's an answer",
+ "lines": [
+  "Stop waiting by your phone",
+  "If they wanted to, they would",
+  "You'd answer them in a minute",
+  "They answer you in a day",
+  "That's not busy",
+  "That's an answer"
+ ],
+ "images": [
+  "img/37-01.jpg",
+  "img/37-02.jpg",
+  "img/37-03.jpg",
+  "img/37-04.jpg",
+  "img/37-05.jpg",
+  "img/37-06.jpg"
+ ]
+},
+{
+ "id": "38",
+ "theme": "Discipline",
+ "title": "Be bad first",
+ "lines": [
+  "Everyone you admire was bad at first",
+  "Bad drawings, bad songs, bad drafts",
+  "They just didn't stop there",
+  "You're still waiting to be ready",
+  "Ready never comes first",
+  "So go be bad at something today"
+ ],
+ "images": [
+  "img/38-01.jpg",
+  "img/38-02.jpg",
+  "img/38-03.jpg",
+  "img/38-04.jpg",
+  "img/38-05.jpg",
+  "img/38-06.jpg"
+ ]
+},
+{
+ "id": "39",
+ "theme": "Love",
+ "title": "Keep you",
+ "lines": [
+  "I used to need to win every fight",
+  "Then I won, and slept alone",
+  "Now I ask what's really wrong",
+  "It's rarely the towel on the floor",
+  "It's \"do you still see me?\"",
+  "I'd rather keep you than be right"
+ ],
+ "images": [
+  "img/39-01.jpg",
+  "img/39-02.jpg",
+  "img/39-03.jpg",
+  "img/39-04.jpg",
+  "img/39-05.jpg",
+  "img/39-06.jpg"
+ ]
+},
+{
+ "id": "40",
+ "theme": "Heartbreak",
+ "title": "Strangers who know everything",
+ "lines": [
+  "We're strangers who know everything",
+  "You know how I take my coffee",
+  "I know what scares you at night",
+  "Now we pass like we never met",
+  "The strangest kind of goodbye",
+  "And I still keep your secrets"
+ ],
+ "images": [
+  "img/40-01.jpg",
+  "img/40-02.jpg",
+  "img/40-03.jpg",
+  "img/40-04.jpg",
+  "img/40-05.jpg",
+  "img/40-06.jpg"
+ ]
+},
+{
+ "id": "41",
+ "theme": "Self-worth",
+ "title": "No auditions",
+ "lines": [
+  "Stop auditioning for people",
+  "Funnier, smaller, easier to like",
+  "Hoping they'll finally pick you",
+  "Real people don't hold auditions",
+  "They just make room",
+  "The right ones never made you try out"
+ ],
+ "images": [
+  "img/41-01.jpg",
+  "img/41-02.jpg",
+  "img/41-03.jpg",
+  "img/41-04.jpg",
+  "img/41-05.jpg",
+  "img/41-06.jpg"
+ ]
+},
+{
+ "id": "42",
+ "theme": "Discipline",
+ "title": "Gave it away",
+ "lines": [
+  "You said you had no time",
+  "Your phone says six hours today",
+  "That's ninety days a year",
+  "Imagine what that could build",
+  "Take back one hour a day",
+  "You didn't lose it. You gave it away."
+ ],
+ "images": [
+  "img/42-01.jpg",
+  "img/42-02.jpg",
+  "img/42-03.jpg",
+  "img/42-04.jpg",
+  "img/42-05.jpg",
+  "img/42-06.jpg"
+ ]
+},
+{
+ "id": "43",
+ "theme": "Love",
+ "title": "The car",
+ "lines": [
+  "On your worst day I stayed calm",
+  "Held your hand, said it'll be okay",
+  "Made the calls, carried the bags",
+  "Then I sat in the car and shook",
+  "One of us had to be strong",
+  "You'll never know about the car"
+ ],
+ "images": [
+  "img/43-01.jpg",
+  "img/43-02.jpg",
+  "img/43-03.jpg",
+  "img/43-04.jpg",
+  "img/43-05.jpg",
+  "img/43-06.jpg"
+ ]
+},
+{
+ "id": "44",
+ "theme": "Heartbreak",
+ "title": "Calm",
+ "lines": [
+  "You'll never love like that again",
+  "You're right, you won't",
+  "Not with that panic",
+  "Not with that fear of losing them",
+  "Next time it'll feel calm",
+  "That's how love was meant to feel"
+ ],
+ "images": [
+  "img/44-01.jpg",
+  "img/44-02.jpg",
+  "img/44-03.jpg",
+  "img/44-04.jpg",
+  "img/44-05.jpg",
+  "img/44-06.jpg"
+ ]
+},
+{
+ "id": "45",
+ "theme": "Self-worth",
+ "title": "Winter",
+ "lines": [
+  "You don't have to earn your rest",
+  "You're not a machine with a quota",
+  "Slowing down isn't falling behind",
+  "Even the ground rests all winter",
+  "And then it blooms",
+  "Nobody calls winter lazy"
+ ],
+ "images": [
+  "img/45-01.jpg",
+  "img/45-02.jpg",
+  "img/45-03.jpg",
+  "img/45-04.jpg",
+  "img/45-05.jpg",
+  "img/45-06.jpg"
+ ]
+},
+{
+ "id": "46",
+ "theme": "Discipline",
+ "title": "Your excuses",
+ "lines": [
+  "Your excuses never miss a day",
+  "Too tired, too late, too busy",
+  "Rain or shine, they show up",
+  "Imagine if your goals did that",
+  "You're not lazy, you're consistent",
+  "Just at the wrong thing"
+ ],
+ "images": [
+  "img/46-01.jpg",
+  "img/46-02.jpg",
+  "img/46-03.jpg",
+  "img/46-04.jpg",
+  "img/46-05.jpg",
+  "img/46-06.jpg"
+ ]
+},
+{
+ "id": "47",
+ "theme": "Love",
+ "title": "Your turn",
+ "lines": [
+  "I put my dream on hold for yours",
+  "Someone had to pay the rent",
+  "I clapped for you from the back row",
+  "Year after year, I didn't mind",
+  "Last night you sat me down",
+  "And said, \"Now it's your turn\""
+ ],
+ "images": [
+  "img/47-01.jpg",
+  "img/47-02.jpg",
+  "img/47-03.jpg",
+  "img/47-04.jpg",
+  "img/47-05.jpg",
+  "img/47-06.jpg"
+ ]
+},
+{
+ "id": "48",
+ "theme": "Heartbreak",
+ "title": "The letter",
+ "lines": [
+  "I wrote you a letter last night",
+  "Three pages I never got to say",
+  "Every why, every how could you",
+  "I read it once, then burned it",
+  "It never needed your reply",
+  "It just needed to leave me"
+ ],
+ "images": [
+  "img/48-01.jpg",
+  "img/48-02.jpg",
+  "img/48-03.jpg",
+  "img/48-04.jpg",
+  "img/48-05.jpg",
+  "img/48-06.jpg"
+ ]
+},
+{
+ "id": "49",
+ "theme": "Self-worth",
+ "title": "Someone's favorite memory",
+ "lines": [
+  "Someone smiles when your name comes up",
+  "You don't know who",
+  "Someone kept your old message",
+  "Someone still uses your advice",
+  "You think you're forgettable",
+  "You're someone's favorite memory"
+ ],
+ "images": [
+  "img/49-01.jpg",
+  "img/49-02.jpg",
+  "img/49-03.jpg",
+  "img/49-04.jpg",
+  "img/49-05.jpg",
+  "img/49-06.jpg"
+ ]
+},
+{
+ "id": "50",
+ "theme": "Discipline",
+ "title": "Roots",
+ "lines": [
+  "Most people quit right before it works",
+  "When it's slow, and quiet, and boring",
+  "Nothing to show, nothing to post",
+  "That's when the roots are growing",
+  "You can't see them yet",
+  "Stop digging up the seed to check"
+ ],
+ "images": [
+  "img/50-01.jpg",
+  "img/50-02.jpg",
+  "img/50-03.jpg",
+  "img/50-04.jpg",
+  "img/50-05.jpg",
+  "img/50-06.jpg"
+ ]
 }
 ];
 
@@ -637,19 +1057,24 @@ window.POEMS = [
 window.CHAPTERS = [
  {title:"Love & Sacrifice", sections:[
   {title:"Giving everything", ids:["21","25","24"]},
-  {title:"What love costs", ids:["23","26"]}]},
+  {title:"What love costs", ids:["23","26"]},
+  {title:"Love in small things", ids:["31","35","39","43","47"]}]},
  {title:"Heartbreak & Moving On", sections:[
   {title:"Still holding on", ids:["22","11","14"]},
   {title:"Seeing it clearly", ids:["04","17","07"]},
-  {title:"Letting go", ids:["05","06"]}]},
+  {title:"Letting go", ids:["05","06"]},
+  {title:"What it taught me", ids:["32","36","40","44","48"]}]},
  {title:"Self-Worth", sections:[
   {title:"Know your worth", ids:["12","15","20"]},
   {title:"The wrong room", ids:["02","03","29"]},
-  {title:"Your people", ids:["28","19","01"]}]},
+  {title:"Your people", ids:["28","19","01"]},
+  {title:"Taking up space", ids:["33","37","41","45","49"]}]},
  {title:"Motivation & Discipline", sections:[
   {title:"Show up", ids:["09","18","13","30"]},
-  {title:"Quiet work", ids:["08","16","10","27"]}]}
+  {title:"Quiet work", ids:["08","16","10","27"]},
+  {title:"The long game", ids:["34","38","42","46","50"]}]}
 ];
+
 
 // "Why this was created" page, shown before the credits. One string per paragraph; edit freely.
 window.WHY_TITLE = "Why I made this";

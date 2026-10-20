@@ -170,13 +170,17 @@ a{color:inherit}
   font:700 .9rem var(--label);letter-spacing:.14em;text-transform:uppercase;padding:15px 22px;box-shadow:5px 5px 0 0 var(--ink);transition:transform .15s ease,box-shadow .15s ease}
 .cta:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 0 var(--ink)}
 .cta svg{width:18px;height:18px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.ctas .cta{margin-top:0}
+.cta.alt{background:transparent;color:var(--lamp);box-shadow:inset 0 0 0 2px var(--lamp),5px 5px 0 0 var(--ink)}
+.cta.alt:hover{box-shadow:inset 0 0 0 2px var(--lamp),7px 7px 0 0 var(--ink)}
 
 @media (max-width:859px){
   .mail{align-items:center;text-align:center}
   .mail p{margin-inline:auto}
   .boxes{width:100%;margin-inline:auto}
   .steps{text-align:left;width:fit-content;max-width:100%;margin-inline:auto}
-  .cta{align-self:center}
+  .ctas{justify-content:center;align-self:center}
 }
 .letter{background:#151d2b;padding-block:8px 80px}
 .letter .card{position:relative;max-width:400px;margin:0 auto;background:var(--paper);color:var(--ink);padding:24px 22px 22px;transform:rotate(-.8deg);box-shadow:6px 7px 0 0 var(--ink)}
@@ -251,14 +255,20 @@ footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
       <p>Every thought, with its stills, in one flip-page book you can read at 3 a.m. It's free for anyone who keeps the light on with us.</p>
       <div class="boxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="yours"></i><i></i><i></i><i></i></div>
       <ol class="steps">
-        <li><span class="n">1</span><div><strong>Follow @3amreruns on Facebook</strong></div></li>
+        <li><span class="n">1</span><div><strong>Follow @3amreruns on Facebook or Instagram</strong></div></li>
         <li><span class="n">2</span><div><strong>Comment on any Reel</strong><span>Whichever one found you at the right hour.</span></div></li>
         <li><span class="n">3</span><div><strong>Check your messages</strong><span>We'll DM you the book. It's sent by hand, so give it a little time.</span></div></li>
       </ol>
+      <div class="ctas">
       <a class="cta" href="https://www.facebook.com/3amreruns" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6.2c0-.8.2-1.2 1.4-1.2H17V2h-2.6C11.3 2 10.4 3.6 10.4 6v2H8v3h2.4v11H14V11h2.6l.4-3z"/></svg>
-        Follow the page
+        Facebook
       </a>
+      <a class="cta alt" href="https://www.instagram.com/3amreruns/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+        Instagram
+      </a>
+      </div>
     </div>
     <div class="board" aria-label="Building directory: the chapters of the book">
       <div class="row head">3AM Reruns · Vol. 1</div>
