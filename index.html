@@ -1,2 +1,470 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3AM Reruns</title>
-<meta http-equiv="refresh" content="0;url=vol1/"><a href="vol1/">Open the book</a>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="3AM Reruns">
+<meta property="og:description" content="Every window holds a thought someone needed at 3 a.m. Follow @3amreruns and comment on a Reel to get the free book.">
+<title>3AM Reruns</title>
+<meta name="description" content="Every window holds a thought someone needed at 3 a.m. Follow @3amreruns and comment on a Reel to get the free book.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Archivo+Narrow:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap">
+<style>
+/* Layout: one apartment block at night. The windows are the Reels; tap one and its tenant's note slides under your door. The lobby below holds the book. */
+:root{
+  --sky:#101827;      /* night sky, deep navy */
+  --wall:#1e2a3b;     /* building facade, slate */
+  --wall-hi:#283749;  /* lit edge of the facade */
+  --ink:#090d16;      /* window glass, shadows */
+  --paper:#ebe3d0;    /* notes, felt-board letters */
+  --lamp:#f0b24a;     /* the one warm accent: lamplight */
+  --mute:#8592a6;     /* secondary text */
+  --display:"Shadows Into Light","Segoe Print","Bradley Hand",cursive;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --label:"Archivo Narrow","Arial Narrow",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--sky)}
+body{background:var(--sky);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.55;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:3px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lbl{font-family:var(--label);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--mute)}
+
+/* ---------- Sky + intro ---------- */
+.night{position:relative;padding-block:28px 0}
+.backdrop{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.star{position:absolute;border-radius:50%;background:var(--paper);opacity:var(--o,.5);animation:twinkle var(--d,6s) ease-in-out var(--dl,0s) infinite}
+@keyframes twinkle{0%,100%{opacity:var(--o,.5)}50%{opacity:calc(var(--o,.5) * .25)}}
+.shoot{position:absolute;top:90px;left:62%;width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--paper));opacity:0;transform:rotate(-24deg);animation:shoot 19s linear 6s infinite}
+@keyframes shoot{0%,94%{opacity:0;translate:0 0}95%{opacity:.7}100%{opacity:0;translate:-220px 98px}}
+.cloud{position:absolute;height:22px;background:var(--paper);opacity:.05;border-radius:22px;animation:drift var(--d,160s) linear infinite}
+.cloud::before{content:"";position:absolute;left:22%;top:-12px;width:40%;height:26px;border-radius:26px;background:inherit}
+@keyframes drift{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+.skyline{position:absolute;left:0;right:0;bottom:22px;height:460px;width:100%}
+.skyline .body,.skyline .pole{fill:var(--c)}
+.skyline .dark{fill:var(--ink);opacity:.35}
+.skyline .haze{--c:#131c2b}
+.skyline .mid{--c:#17212f}
+.skyline .near{--c:#1b2636}
+.skyline .haze .w{opacity:.3}
+.skyline .mid .w{opacity:.45}
+.skyline .lattice{fill:none;stroke:var(--c);stroke-width:2.5}
+.skyline .wire{fill:none;stroke:var(--c);stroke-width:1.2}
+.skyline .w{fill:var(--lamp);opacity:.55}
+.skyline .w.blink{animation:winblink var(--d,14s) steps(1) var(--dl,0s) infinite}
+@keyframes winblink{0%,60%{opacity:.55}61%,100%{opacity:0}}
+.skyline .beacon{fill:#e0574a;animation:beacon 2.6s ease-in-out infinite}
+@keyframes beacon{0%,100%{opacity:.85}50%{opacity:.1}}
+.night>.wrap{z-index:1}
+
+.moon{position:absolute;z-index:0;top:34px;right:max(22px,env(safe-area-inset-right,0px));width:54px;height:54px;border-radius:50%;background:var(--paper);box-shadow:inset -14px -4px 0 0 var(--sky);transform:rotate(-20deg);opacity:.9}
+.wrap{max-width:1080px;margin:0 auto;position:relative}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-right:70px}
+.handle{font-family:var(--label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem;color:var(--paper);text-decoration:none}
+.count{font-variant-numeric:tabular-nums}
+.count b{color:var(--lamp);font-weight:600}
+.intro{max-width:34ch;margin:22px 0 0;font-size:1.06rem;color:var(--paper);text-wrap:balance}
+.intro em{font-style:normal;color:var(--lamp)}
+
+/* ---------- Stage: building + note ---------- */
+.stage{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;margin-top:26px;align-items:start}
+@media (min-width:860px){.stage{grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:56px}.note-col{position:sticky;top:calc(24px + env(safe-area-inset-top,0px))}}
+
+.building{position:relative;max-width:520px;margin:0 auto;width:100%}
+.roof{position:relative;height:118px}
+.tower{position:absolute;right:14%;bottom:18px;width:64px;height:64px}
+.tower .tank{position:absolute;inset:0 0 18px;background:var(--wall);border-radius:6px 6px 2px 2px;
+  background-image:repeating-linear-gradient(90deg,transparent 0 9px,var(--ink) 9px 10px)}
+.tower .tank::before{content:"";position:absolute;left:-4px;right:-4px;top:-14px;height:16px;background:var(--wall);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.tower .legs{position:absolute;left:8px;right:8px;bottom:0;height:18px;border-left:3px solid var(--wall);border-right:3px solid var(--wall);
+  background:linear-gradient(var(--wall),var(--wall)) center/3px 100% no-repeat}
+.sign{position:absolute;left:6%;bottom:16px;display:flex;flex-direction:column;align-items:flex-start}
+.sign h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(2.6rem,9vw,3.6rem);line-height:.9;color:var(--paper);
+  padding:6px 14px 2px;background:var(--ink);border:2px solid var(--wall-hi);transform:rotate(-2deg)}
+.sign h1 span{color:var(--lamp)}
+.sign .posts{display:flex;gap:46px;margin-left:24px}
+.sign .posts i{display:block;width:3px;height:14px;background:var(--wall-hi)}
+.roof::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:var(--wall-hi)}
+
+.facade{position:relative;background:var(--wall);padding:18px 16px 0;
+  background-image:linear-gradient(90deg,var(--wall-hi) 0 6px,transparent 6px),repeating-linear-gradient(180deg,transparent 0 30px,rgba(9,13,22,.18) 30px 31px)}
+.floor{display:grid;grid-template-columns:24px repeat(5,minmax(0,1fr));gap:9px;align-items:center;padding-block:9px;border-bottom:4px solid var(--wall-hi)}
+.floor .fl{font-family:var(--label);font-weight:600;font-size:.7rem;color:var(--mute);text-align:center;letter-spacing:.05em}
+.win{position:relative;aspect-ratio:3/4;max-width:100%;padding:0;border:0;border-radius:0;background:var(--ink);cursor:pointer;overflow:hidden;
+  box-shadow:0 0 0 3px var(--ink),0 5px 0 -1px var(--wall-hi)}
+.win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.13) saturate(.25);transition:filter .5s ease}
+.win::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(var(--ink),var(--ink)) 50% 0/3px 100% no-repeat,linear-gradient(var(--ink),var(--ink)) 0 42%/100% 3px no-repeat}
+.win::after{content:"";position:absolute;left:0;right:0;top:0;height:var(--blind,0%);background:repeating-linear-gradient(180deg,#1a2231 0 4px,var(--ink) 4px 5px);z-index:1;transition:height .4s ease}
+.win.on img{filter:none}
+.win.on::after{height:0}
+.win.on{box-shadow:0 0 0 3px var(--ink),0 5px 0 -1px var(--lamp)}
+.win.cur{box-shadow:0 0 0 3px var(--lamp),0 5px 0 -1px var(--lamp)}
+.win:hover:not(.on) img{filter:brightness(.3) saturate(.4)}
+.win.flick img{animation:flick .42s steps(1) 1}
+@keyframes flick{0%{filter:brightness(.13)}25%{filter:none}45%{filter:brightness(.2)}65%{filter:none}}
+
+.ground{position:relative;background:var(--wall);padding:14px 16px 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:12px}
+.awning{grid-column:1/-1;height:10px;background:var(--ink)}
+.door{width:78px;height:104px;background:var(--lamp);position:relative;border:5px solid var(--ink);border-bottom:0}
+.door::before{content:"";position:absolute;inset:8px 8px 0;border:3px solid var(--ink);border-bottom:0;
+  background:linear-gradient(var(--ink),var(--ink)) 50% 0/3px 100% no-repeat}
+.door b{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-family:var(--label);font-weight:700;font-size:.72rem;letter-spacing:.12em;color:var(--paper);white-space:nowrap}
+.plant{justify-self:start;width:46px;height:58px;background:var(--ink);clip-path:polygon(20% 100%,80% 100%,85% 70%,100% 30%,70% 45%,60% 0,45% 40%,20% 10%,25% 55%,0 40%,15% 70%)}
+.box{justify-self:end;width:40px;height:52px;background:var(--wall-hi);border-top:6px solid var(--ink)}
+.street{height:22px;background:var(--ink);box-shadow:0 22px 0 0 #0d1320}
+.lamp-post{position:absolute;left:-6px;bottom:22px;width:6px;height:180px;background:var(--ink)}
+.lamp-post::before{content:"";position:absolute;top:-6px;left:0;width:34px;height:8px;background:var(--ink)}
+.lamp-post::after{content:"";position:absolute;top:2px;left:18px;width:90px;height:176px;background:var(--lamp);opacity:.09;clip-path:polygon(10% 0,22% 0,100% 100%,0 100%)}
+
+/* ---------- Note under the door ---------- */
+.note{position:relative;background:var(--paper);color:var(--ink);display:grid;grid-template-columns:minmax(0,132px) minmax(0,1fr);gap:20px;padding:18px;transform:rotate(.6deg);
+  box-shadow:6px 7px 0 0 var(--ink)}
+.note::before{content:"";position:absolute;top:-10px;left:42%;width:78px;height:22px;background:var(--lamp);opacity:.85;transform:rotate(-3deg)}
+.note .still{aspect-ratio:9/16;max-width:100%;background:var(--ink);overflow:hidden}
+.note .still img{width:100%;height:100%;object-fit:cover;display:block}
+.note .meta{display:flex;flex-direction:column;gap:10px;min-width:0}
+.note .apt{font-family:var(--label);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#59606e}
+.note h2{margin:0;font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.05}
+.note .lines{margin:0;padding:0;list-style:none;font-family:var(--display);font-size:1.32rem;line-height:1.3;display:flex;flex-direction:column;gap:4px}
+.note .lines li:last-child{color:#a2600c}
+.note .more{margin-top:auto;font-size:.86rem;color:#4b5261}
+.note .more a{font-weight:600}
+.hint{margin:16px 2px 0;font-size:.92rem;color:var(--mute);display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btn-ghost{font:600 .78rem var(--label);letter-spacing:.12em;text-transform:uppercase;background:none;color:var(--paper);border:1.5px solid var(--wall-hi);padding:9px 14px;cursor:pointer}
+.btn-ghost:hover{border-color:var(--lamp);color:var(--lamp)}
+@media (max-width:420px){.note{grid-template-columns:minmax(0,96px) minmax(0,1fr);gap:14px;padding:14px}.note h2{font-size:1.6rem}.note .lines{font-size:1.18rem}}
+
+/* ---------- Lobby ---------- */
+.lobby{background:#151d2b;margin-top:0;padding-block:64px 72px;border-top:10px solid var(--ink)}
+.lobby .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
+@media (min-width:860px){.lobby .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}}
+.lobby h3{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:clamp(2rem,6vw,2.7rem);line-height:1.05;color:var(--paper);text-wrap:balance}
+.lobby p{margin:0;max-width:44ch;color:#c9cfda}
+
+.board{background:#1a1a1c;padding:22px 20px 26px;border:10px solid #3a2b20;box-shadow:inset 0 0 0 2px #000;
+  background-image:repeating-linear-gradient(180deg,#1f1f22 0 5px,#141416 5px 7px)}
+.board .row{display:flex;justify-content:space-between;gap:12px;font-family:var(--label);font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:#f3efe6;font-size:clamp(.78rem,2.6vw,.95rem);line-height:2.1}
+.board .row span:last-child{font-variant-numeric:tabular-nums;color:#f3efe6}
+.board .row.head{justify-content:center;font-weight:700;letter-spacing:.24em;margin-bottom:6px}
+.board .row.gap{height:12px}
+.board .row.dim{color:#a9a59c}
+
+.mail{display:flex;flex-direction:column;gap:18px}
+.boxes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;max-width:420px}
+.boxes i{aspect-ratio:5/3;background:var(--wall);border:2px solid var(--wall-hi);position:relative}
+.boxes i::after{content:"";position:absolute;left:20%;right:20%;top:30%;height:3px;background:var(--ink)}
+.boxes i.yours{background:var(--lamp);border-color:var(--lamp)}
+.boxes i.yours::after{background:var(--ink)}
+.steps{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;max-width:460px}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.steps .n{font-family:var(--display);font-size:2rem;line-height:1;color:var(--lamp);text-align:center}
+.steps strong{display:block;font-weight:600;color:var(--paper)}
+.steps span{color:#b6bdca;font-size:.95rem}
+.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:8px;background:var(--lamp);color:var(--ink);text-decoration:none;
+  font:700 .9rem var(--label);letter-spacing:.14em;text-transform:uppercase;padding:15px 22px;box-shadow:5px 5px 0 0 var(--ink);transition:transform .15s ease,box-shadow .15s ease}
+.cta:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 0 var(--ink)}
+.cta svg{width:18px;height:18px}
+
+@media (max-width:859px){
+  .mail{align-items:center;text-align:center}
+  .mail p{margin-inline:auto}
+  .boxes{width:100%;margin-inline:auto}
+  .steps{text-align:left;width:fit-content;max-width:100%;margin-inline:auto}
+  .cta{align-self:center}
+}
+footer{padding-block:28px 34px;background:var(--ink);color:var(--mute);font-size:.84rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
+
+@media (max-width:640px){.moon{top:10px;width:40px;height:40px;box-shadow:inset -10px -3px 0 0 var(--sky)}.lamp-post{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<style>html{color-scheme:dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+
+
+<div class="night gut">
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <div class="moon" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="top">
+      <a class="handle" href="https://www.facebook.com/3amreruns" target="_blank" rel="noopener">@3amreruns</a>
+      <span class="lbl count" aria-live="polite">Lights on <b id="lit">0</b></span>
+    </div>
+    <p class="intro">Every window is a thought. Behind each one, someone is still awake with words they needed at 3 a.m. <em>Tap a dark window to switch its light on.</em></p>
+
+    <div class="stage">
+      <div class="building" role="group" aria-label="The building: one thought in each apartment">
+        <div class="roof" aria-hidden="false">
+          <div class="sign"><h1>3AM <span>Reruns</span></h1><div class="posts" aria-hidden="true"><i></i><i></i><i></i></div></div>
+          <div class="tower" aria-hidden="true"><div class="tank"></div><div class="legs"></div></div>
+        </div>
+        <div class="facade" id="facade"></div>
+        <div class="ground" aria-hidden="true">
+          <div class="awning"></div>
+          <div class="plant"></div>
+          <div class="door"><b>LOBBY ↓</b></div>
+          <div class="box"></div>
+        </div>
+        <div class="street" aria-hidden="true"></div>
+        <div class="lamp-post" aria-hidden="true"></div>
+      </div>
+
+      <div class="note-col">
+        <article class="note" id="note" aria-live="polite">
+          <div class="still"><img id="n-img" alt=""></div>
+          <div class="meta">
+            <div class="apt" id="n-apt"></div>
+            <h2 id="n-title"></h2>
+            <ul class="lines" id="n-lines"></ul>
+            <p class="more" id="n-more">The full thought is a Reel on <a href="https://www.facebook.com/3amreruns" target="_blank" rel="noopener">@3amreruns</a>, and it's in <a href="#lobby">the book downstairs</a>.</p>
+          </div>
+        </article>
+        <div class="hint">
+          <span id="hint-text">Tap another dark window to read its thought.</span>
+          <button class="btn-ghost" id="all" type="button">Switch every light on</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="lobby gut" id="lobby" aria-labelledby="lobby-h">
+  <div class="wrap">
+    <div class="mail">
+      <h3 id="lobby-h">There's a book in your mailbox.</h3>
+      <p>Every thought, with its stills, in one flip-page book you can read at 3 a.m. It's free for anyone who keeps the light on with us.</p>
+      <div class="boxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="yours"></i><i></i><i></i><i></i></div>
+      <ol class="steps">
+        <li><span class="n">1</span><div><strong>Follow @3amreruns on Facebook</strong></div></li>
+        <li><span class="n">2</span><div><strong>Comment on any Reel</strong><span>Whichever one found you at the right hour.</span></div></li>
+        <li><span class="n">3</span><div><strong>Check your messages</strong><span>We'll DM you the book. It's sent by hand, so give it a little time.</span></div></li>
+      </ol>
+      <a class="cta" href="https://www.facebook.com/3amreruns" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6.2c0-.8.2-1.2 1.4-1.2H17V2h-2.6C11.3 2 10.4 3.6 10.4 6v2H8v3h2.4v11H14V11h2.6l.4-3z"/></svg>
+        Follow the page
+      </a>
+    </div>
+    <div class="board" aria-label="Building directory: the chapters of the book">
+      <div class="row head">3AM Reruns · Vol. 1</div>
+      <div class="row"><span>Love &amp; Sacrifice</span></div>
+      <div class="row"><span>Heartbreak &amp; Moving On</span></div>
+      <div class="row"><span>Self-Worth</span></div>
+      <div class="row"><span>Motivation &amp; Discipline</span></div>
+      <div class="row gap"></div>
+      <div class="row dim"><span>Price</span><span>Free</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="gut">
+  <div class="wrap">
+    <span class="sig">Lights stay on all night.</span>
+    <span>3AM Reruns · @3amreruns</span>
+  </div>
+</footer>
+
+<script>
+const POEMS = [{"id":"01","theme":"Self-worth","title":"Nobody is coming","lines":["That sounds sad","Until you realize what it means","You're free"]},{"id":"02","theme":"Self-worth","title":"Wrong room","lines":["You were just in the wrong room","The right room won't ask you to shrink","Their too much is someone's enough"]},{"id":"03","theme":"Self-worth","title":"Why you stayed","lines":["That wasn't love","It was erosion","The right person won't need convincing"]},{"id":"04","theme":"Heartbreak","title":"The trailer","lines":["The real movie showed up later","And you stayed anyway","Stop grieving a trailer"]},{"id":"05","theme":"Heartbreak","title":"Closure","lines":["So write your own","And let the last line be:","I chose me"]},{"id":"06","theme":"Heartbreak","title":"Nobody claps","lines":["You laugh again without checking their story","Nobody claps","But that's the day you won"]},{"id":"07","theme":"Heartbreak","title":"The lesson","lines":["Some people come as lessons","They teach you what you'll never accept again","Thank them. Then block them."]},{"id":"08","theme":"Success","title":"Recipe for success","lines":["Stay quiet while it's working","Let them call it luck","You'll know it was a thousand Tuesdays"]},{"id":"09","theme":"Discipline","title":"The guest","lines":["Discipline lives here","It does the dishes on the days you don't feel like it","Stop waiting for the guest"]},{"id":"10","theme":"Success","title":"Overnight","lines":["Then they call it overnight","Let them talk","Overnight took six years of nights"]},{"id":"11","theme":"Heartbreak","title":"Reading it right","lines":["It went exactly like them","You just read it with hope","Tonight, read it like a stranger would"]},{"id":"12","theme":"Self-worth","title":"The discount","lines":["And you've been charging nothing","Raise your price","Watch who suddenly can't afford you"]},{"id":"13","theme":"Discipline","title":"Future you","lines":["Tired of nobody noticing","Future you is smiling right now","Because they know you didn't quit"]},{"id":"14","theme":"Heartbreak","title":"The first call","lines":["So tell someone else","Then someone else again","One day they won't even be second"]},{"id":"15","theme":"Self-worth","title":"Age seven","lines":["Every \"I'm so stupid\"","Every \"I'm not enough\"","She's still listening"]},{"id":"16","theme":"Success","title":"The quiet year","lines":["They'll ask where you went","Don't explain","Let them find out with everyone else"]},{"id":"17","theme":"Heartbreak","title":"Almost","lines":["Because you finish their sentences","Stop finishing them","Almost is just a polite no"]},{"id":"18","theme":"Discipline","title":"Kept promises","lines":["Each one teaches you something","That your word means nothing","Confidence is just promises kept"]},{"id":"19","theme":"Self-worth","title":"Who goes quiet","lines":["Some are just keeping score","Keep winning anyway","Their silence is the loudest applause"]},{"id":"20","theme":"Self-worth","title":"3 a.m. lies","lines":["Here's what 3 a.m. won't tell you","You've survived every single one","Including this one"]},{"id":"21","theme":"Heartbreak","title":"Done loving alone","lines":["It still wasn't enough to keep you","I'm not sorry I loved you","I'm just done loving for two"]},{"id":"22","theme":"Heartbreak","title":"My fingers remember","lines":["My fingers still remember it","Healing isn't a straight line","Some nights it still leads back to you"]},{"id":"23","theme":"Love","title":"Staying","lines":["Some days leaving looks easier","But easy was never the promise","Staying is the love story nobody films"]},{"id":"24","theme":"Heartbreak","title":"The porch light","lines":["So you never had to hurry home","Tonight I turned it off","Not to punish you, just to sleep"]},{"id":"25","theme":"Heartbreak","title":"Your side","lines":["And I'm still not okay","I still sleep on my side of the bed","Like your side is still yours"]},{"id":"26","theme":"Love","title":"What it costs","lines":["People call that losing yourself","I call it choosing you","What costs nothing is worth nothing"]},{"id":"27","theme":"Discipline","title":"Luck","lines":["And they'll call it luck","Let them","Luck doesn't wake up at 5 a.m."]},{"id":"28","theme":"Self-worth","title":"Your circle","lines":["Then notice who still calls","That's your circle","Everyone else was an audience"]},{"id":"29","theme":"Self-worth","title":"Stopped bending","lines":["Now you have boundaries","And suddenly you've \"changed\"","You just stopped bending"]},{"id":"30","theme":"Success","title":"Someday","lines":["Someday you'll say what you mean","Someday isn't on any calendar","Today is"]}];
+const LIT0 = ["20","01","08","24","15","27","11","29","05"];
+const facade = document.getElementById('facade');
+const units = "ABCDE";
+const wins = {};
+let cur = null;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const blinds = [0,40,0,65,0,20,0,0,55,0,30,0,0,70,0,0,45,0,0,25,0,60,0,0,35,0,0,50,0,15];
+
+for (let f = 0; f < 6; f++) {
+  const row = document.createElement('div');
+  row.className = 'floor';
+  const floorNo = 6 - f;
+  row.innerHTML = `<span class="fl" aria-hidden="true">${floorNo}F</span>`;
+  for (let u = 0; u < 5; u++) {
+    const i = f * 5 + u, p = POEMS[i];
+    p.apt = floorNo + units[u];
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'win';
+    b.id = 'w' + p.id;
+    b.style.setProperty('--blind', blinds[i] + '%');
+    b.setAttribute('aria-label', `Apartment ${p.apt}: ${p.title}`);
+    b.innerHTML = `<img src="img/${p.id}.jpg" alt="" loading="${f < 3 ? 'eager' : 'lazy'}" decoding="async">`;
+    b.addEventListener('click', () => open(p, true));
+    row.appendChild(b);
+    wins[p.id] = b;
+  }
+  facade.appendChild(row);
+}
+
+const litCount = () => document.querySelectorAll('.win.on').length;
+function updateCount() {
+  const n = litCount();
+  document.getElementById('lit').textContent = n;
+  if (n === POEMS.length) {
+    document.getElementById('hint-text').innerHTML = 'Every light is on. The whole building is in <a href="#lobby">the book downstairs</a>.';
+    document.getElementById('all').hidden = true;
+  }
+}
+function light(id, animate) {
+  const w = wins[id];
+  if (w.classList.contains('on')) return;
+  w.classList.add('on');
+  w.setAttribute('aria-pressed', 'true');
+  if (animate && !reduce) { w.classList.remove('flick'); void w.offsetWidth; w.classList.add('flick'); }
+}
+function open(p, fromTap) {
+  light(p.id, fromTap);
+  if (cur) cur.classList.remove('cur');
+  cur = wins[p.id]; cur.classList.add('cur');
+  document.getElementById('n-img').src = `img/${p.id}.jpg`;
+  document.getElementById('n-apt').textContent = `Apt ${p.apt} · ${p.theme}`;
+  document.getElementById('n-title').textContent = p.title;
+  const ul = document.getElementById('n-lines');
+  ul.innerHTML = '';
+  p.lines.forEach(l => { const li = document.createElement('li'); li.textContent = l; ul.appendChild(li); });
+  updateCount();
+  if (fromTap && matchMedia('(max-width: 859px)').matches) {
+    const r = document.getElementById('note').getBoundingClientRect();
+    if (r.top > innerHeight - 120) document.getElementById('note').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'});
+  }
+}
+
+document.getElementById('all').addEventListener('click', () => {
+  const dark = POEMS.filter(p => !wins[p.id].classList.contains('on'));
+  let delay = 0;
+  if (matchMedia('(max-width: 859px)').matches) {
+    document.querySelector('.building').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+    delay = reduce ? 0 : 600;
+  }
+  dark.forEach((p, k) => setTimeout(() => { light(p.id, true); updateCount(); }, delay + (reduce ? 0 : k * 90)));
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('a[href="#lobby"]')) return;
+  e.preventDefault();
+  document.getElementById('lobby').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+});
+Object.values(wins).forEach(w => w.setAttribute('aria-pressed', 'false'));
+LIT0.forEach(id => light(id, false));
+open(POEMS.find(p => p.id === '20'), false);
+
+
+
+(function backdrop(){
+  const bd = document.getElementById('backdrop');
+  const H = Math.max(document.querySelector('.night').offsetHeight, 900);
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('i');
+    const top = Math.pow(Math.random(), 1.6) * H * .7;
+    const size = Math.random() < .8 ? rnd(1,1.8) : rnd(2,2.6);
+    s.className = 'star';
+    s.style.cssText = `left:${rnd(0,100)}%;top:${top}px;width:${size}px;height:${size}px;--o:${rnd(.25,.75).toFixed(2)};--d:${rnd(4,10).toFixed(1)}s;--dl:-${rnd(0,10).toFixed(1)}s`;
+    frag.appendChild(s);
+  }
+  [[60,190,170],[240,130,230],[420,240,300]].forEach(([top,w,d],k) => {
+    const c = document.createElement('i');
+    c.className = 'cloud';
+    c.style.cssText = `top:${top}px;left:0;width:${w}px;--d:${d}s;animation-delay:-${k*70}s`;
+    frag.appendChild(c);
+  });
+  const sh = document.createElement('i'); sh.className = 'shoot'; frag.appendChild(sh);
+
+  // skyline: three flat layers (haze towers, mid offices, near houses + utility poles)
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', 'skyline');
+  svg.setAttribute('viewBox', '0 0 1600 460');
+  svg.setAttribute('preserveAspectRatio', 'xMidYMax slice');
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  let seed = 11; const pr = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const R = (x, y, w, h) => `M${x.toFixed(1)} ${y.toFixed(1)}h${w.toFixed(1)}v${h.toFixed(1)}h${(-w).toFixed(1)}z`;
+  const B = 460;
+
+  function layer(name, opts) {
+    const g = el('g', {class: 'layer ' + name});
+    let body = '', dark = '';
+    const lit = [];
+    const windows = (x, y, w, h, cw, ch, gx, gy, rate) => {
+      const cols = Math.floor((w - gx) / (cw + gx)), rows = Math.floor((h - gy * 2) / (ch + gy));
+      const ox = x + (w - cols * (cw + gx) + gx) / 2;
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+        const wx = ox + c * (cw + gx), wy = y + gy + r * (ch + gy);
+        if (pr() < rate) lit.push([wx, wy, cw, ch]); else dark += R(wx, wy, cw, ch);
+      }
+    };
+    let x = opts.start;
+    while (x < 1640) {
+      const t = opts.pick();
+      const w = t.w(), h = t.h(), y = B - h;
+      body += R(x, y, w, h);
+      const rate = [0, .03, .08, .16][Math.floor(pr() * 4)];
+      if (t.kind === 'tower') {
+        const sw = w * .66, sh = 18 + pr() * 22;
+        body += R(x + (w - sw) / 2, y - sh, sw, sh);
+        if (pr() < .6) body += R(x + w / 2 - 1.5, y - sh - 40 - pr() * 30, 3, 40 + 30);
+        windows(x, y, w, h, 4, 6, 5, 7, rate);
+      } else if (t.kind === 'office') {
+        if (pr() < .5) { // water tank on legs
+          const tx = x + 8 + pr() * (w - 40);
+          body += R(tx, y - 24, 22, 16) + `M${tx - 2} ${y - 24}l13 -9l13 9z` + R(tx + 3, y - 8, 2, 8) + R(tx + 17, y - 8, 2, 8);
+        }
+        if (pr() < .35) { // billboard frame
+          const bx = x + 6 + pr() * (w - 70);
+          body += R(bx, y - 34, 56, 22) + R(bx + 8, y - 12, 2, 12) + R(bx + 46, y - 12, 2, 12);
+        }
+        body += R(x - 2, y, w + 4, 4);
+        windows(x, y + 4, w, h - 4, 7, 9, 6, 9, rate);
+      } else { // house: slanted or gable roof, AC unit
+        const peak = 14 + pr() * 16;
+        body += pr() < .5 ? `M${x} ${y}L${x + w / 2} ${y - peak}L${x + w} ${y}z` : `M${x} ${y}L${x + w} ${y - peak}L${x + w} ${y}z`;
+        if (pr() < .5) body += R(x + w * .65, y + 10, 12, 9);
+        windows(x, y + 6, w, h - 6, 10, 12, 10, 12, rate * 1.6);
+      }
+      x += w + (pr() < opts.gapChance ? 4 + pr() * 18 : 0);
+    }
+    el('path', {d: body, class: 'body'}, g);
+    el('path', {d: dark, class: 'dark'}, g);
+    lit.forEach(([wx, wy, cw, ch]) => {
+      const r = el('rect', {x: wx.toFixed(1), y: wy.toFixed(1), width: cw, height: ch, class: 'w'}, g);
+      if (pr() < .15) { r.classList.add('blink'); r.style.setProperty('--d', (10 + pr() * 16).toFixed(1) + 's'); r.style.setProperty('--dl', '-' + (pr() * 20).toFixed(1) + 's'); }
+    });
+    return g;
+  }
+
+  layer('haze', {start: -10, gapChance: .55, pick: () => ({kind: 'tower', w: () => 34 + pr() * 46, h: () => 230 + pr() * 190})});
+  // radio tower with a slow red beacon
+  const rg = el('g', {class: 'layer haze'});
+  const tx = 1210, top = 70;
+  el('path', {class: 'lattice', d: `M${tx - 26} ${B}L${tx} ${top}L${tx + 26} ${B}M${tx - 20} ${B - 70}h40M${tx - 15} ${B - 150}h30M${tx - 9} ${B - 240}h18M${tx - 5} ${B - 310}h10M${tx - 20} ${B - 70}L${tx + 15} ${B - 150}M${tx + 20} ${B - 70}L${tx - 15} ${B - 150}M${tx - 15} ${B - 150}L${tx + 9} ${B - 240}M${tx + 15} ${B - 150}L${tx - 9} ${B - 240}`}, rg);
+  el('circle', {cx: tx, cy: top - 4, r: 3.5, class: 'beacon'});
+  layer('mid', {start: -30, gapChance: .35, pick: () => ({kind: 'office', w: () => 70 + pr() * 90, h: () => 120 + pr() * 150})});
+  const near = layer('near', {start: -20, gapChance: .5, pick: () => ({kind: 'house', w: () => 60 + pr() * 70, h: () => 46 + pr() * 60})});
+  // utility poles and sagging wires
+  let wires = '', poles = '';
+  const px = [];
+  for (let p = 40; p < 1640; p += 230 + pr() * 60) px.push(p);
+  px.forEach(p => { poles += R(p, B - 190, 4, 190) + R(p - 18, B - 180, 40, 3) + R(p - 12, B - 160, 28, 3); });
+  for (let i = 0; i < px.length - 1; i++) {
+    const a = px[i] + 2, b = px[i + 1] + 2, m = (a + b) / 2;
+    [[-180, 22], [-180 + 0, 30], [-160, 18]].forEach(([yy, sag], k) => {
+      const off = k === 1 ? 16 : k === 0 ? -16 : 0;
+      wires += `M${a + off} ${B + yy}Q${m} ${B + yy + sag * 2} ${b + off} ${B + yy}`;
+    });
+  }
+  el('path', {d: poles, class: 'pole'}, near);
+  el('path', {d: wires, class: 'wire'}, near);
+  frag.appendChild(svg);
+  bd.appendChild(frag);
+})();
+</script>
+
+</body>
+</html>
