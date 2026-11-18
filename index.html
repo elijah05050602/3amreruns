@@ -190,6 +190,34 @@ a{color:inherit}
 .letter p{margin:0 0 9px;font-family:var(--display);font-size:.95rem;line-height:1.4}
 .letter .sig{margin:12px 0 0;text-align:right;color:#a2600c;font-size:1.05rem}
 @media (max-width:420px){.letter .card{padding:22px 18px 18px}}
+.tonight-btn{background:none;border:0;padding:0;cursor:pointer}
+.tonight-btn:hover{color:var(--paper)}
+.tonight-btn b{color:var(--lamp);font-weight:600}
+.top .meta-r{display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
+.moods{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.moods .lbl{margin-right:4px}
+.mood{font:600 .74rem var(--label);letter-spacing:.1em;text-transform:uppercase;background:none;color:var(--paper);border:1.5px solid var(--wall-hi);padding:7px 11px;cursor:pointer}
+.mood:hover{border-color:var(--lamp)}
+.mood[aria-pressed="true"]{background:var(--lamp);border-color:var(--lamp);color:var(--ink)}
+.win.vacant{cursor:default}
+.win.vacant::after{height:100%}
+.win.tonight::before{background:linear-gradient(var(--ink),var(--ink)) 50% 0/3px 100% no-repeat,linear-gradient(var(--ink),var(--ink)) 0 42%/100% 3px no-repeat}
+.win .tag{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);z-index:3;background:var(--lamp);color:var(--ink);font:700 .5rem/1 var(--label);letter-spacing:.08em;text-transform:uppercase;padding:2px 3px;white-space:nowrap;pointer-events:none}
+.car{position:absolute;left:16px;width:24px;background:var(--lamp);z-index:1;transition:top 1.3s cubic-bezier(.6,0,.3,1);pointer-events:none;opacity:0}
+.car.go{opacity:.95}
+.floor .fl{position:relative;z-index:2}
+.floor.at .fl{color:var(--ink)}
+.note-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.share{font:700 .7rem var(--label);letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;padding:8px 11px;cursor:pointer}
+.share:hover{background:#26334a}
+.share-msg{font-size:.78rem;color:#4b5261}
+.share-url{width:100%;font:.78rem var(--body);padding:5px;border:1px solid #b9b2a2;background:#f6f1e6;color:var(--ink)}
+.btn-lamp{font:700 .78rem var(--label);letter-spacing:.12em;text-transform:uppercase;background:var(--lamp);color:var(--ink);border:1.5px solid var(--lamp);padding:9px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn-lamp:disabled{opacity:.6;cursor:wait}
+.btn-lamp .disp{font-variant-numeric:tabular-nums;background:var(--ink);color:var(--lamp);padding:1px 5px;min-width:2.6em;text-align:center}
+.board .row.pick{width:100%;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.board .row.pick:hover span:first-child,.board .row.pick[aria-pressed="true"] span:first-child{color:var(--lamp)}
+.board .row.pick span:last-child{color:#a9a59c;font-size:.8em}
 footer{padding-block:28px 34px;background:var(--ink);color:var(--mute);font-size:.84rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
@@ -208,9 +236,10 @@ footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
   <div class="wrap">
     <div class="top">
       <a class="handle" href="https://www.facebook.com/3amreruns" target="_blank" rel="noopener">@3amreruns</a>
-      <span class="lbl count" aria-live="polite">Lights on <b id="lit">0</b></span>
+      <span class="meta-r"><button class="lbl tonight-btn" id="tonight-btn" type="button">Tonight's window <b id="tonight-apt"></b></button><span class="lbl count" aria-live="polite">Lights on <b id="lit">0</b></span></span>
     </div>
-    <p class="intro">Every window is a thought. Behind each one, someone is still awake with words they needed at 3 a.m. <em>Tap a dark window to switch its light on.</em></p>
+    <p class="intro">Every window is a thought. Behind each one, someone is still awake with words they needed at 3 a.m. <em>Tap a dark window, or take the elevator to a random floor.</em></p>
+    <div class="moods" role="group" aria-label="Filter by feeling"><span class="lbl">Tonight I feel</span><button class="mood" type="button" data-ch="" aria-pressed="true">Anything</button></div>
 
     <div class="stage">
       <div class="building" role="group" aria-label="The building: one thought in each apartment">
@@ -236,11 +265,13 @@ footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
             <div class="apt" id="n-apt"></div>
             <h2 id="n-title"></h2>
             <ul class="lines" id="n-lines"></ul>
+            <div class="note-actions"><button class="share" id="share" type="button">Share this window</button><span class="share-msg" id="share-msg" aria-live="polite"></span></div>
             <p class="more" id="n-more">The full thought is a Reel on <a href="https://www.facebook.com/3amreruns" target="_blank" rel="noopener">@3amreruns</a>, and it's in <a href="#lobby">the book downstairs</a>.</p>
           </div>
         </article>
         <div class="hint">
           <span id="hint-text">Tap another dark window to read its thought.</span>
+          <button class="btn-lamp" id="lift" type="button"><span class="disp" id="lift-disp">L</span>Take the elevator</button>
           <button class="btn-ghost" id="all" type="button">Switch every light on</button>
         </div>
       </div>
@@ -270,12 +301,9 @@ footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
       </a>
       </div>
     </div>
-    <div class="board" aria-label="Building directory: the chapters of the book">
+    <div class="board" role="group" aria-label="Building directory: tap a chapter to fill the building with it">
       <div class="row head">3AM Reruns · Vol. 1</div>
-      <div class="row"><span>Love &amp; Sacrifice</span></div>
-      <div class="row"><span>Heartbreak &amp; Moving On</span></div>
-      <div class="row"><span>Self-Worth</span></div>
-      <div class="row"><span>Motivation &amp; Discipline</span></div>
+      <div id="board-rows"></div>
       <div class="row gap"></div>
       <div class="row dim"><span>Price</span><span>Free</span></div>
     </div>
@@ -302,90 +330,269 @@ footer .sig{font-family:var(--display);font-size:1.25rem;color:var(--paper)}
   </div>
 </footer>
 
+<script src="thoughts.js"></script>
 <script>
-const POEMS = [{"id":"01","theme":"Self-worth","title":"Nobody is coming","lines":["That sounds sad","Until you realize what it means","You're free"]},{"id":"02","theme":"Self-worth","title":"Wrong room","lines":["You were just in the wrong room","The right room won't ask you to shrink","Their too much is someone's enough"]},{"id":"03","theme":"Self-worth","title":"Why you stayed","lines":["That wasn't love","It was erosion","The right person won't need convincing"]},{"id":"04","theme":"Heartbreak","title":"The trailer","lines":["The real movie showed up later","And you stayed anyway","Stop grieving a trailer"]},{"id":"05","theme":"Heartbreak","title":"Closure","lines":["So write your own","And let the last line be:","I chose me"]},{"id":"06","theme":"Heartbreak","title":"Nobody claps","lines":["You laugh again without checking their story","Nobody claps","But that's the day you won"]},{"id":"07","theme":"Heartbreak","title":"The lesson","lines":["Some people come as lessons","They teach you what you'll never accept again","Thank them. Then block them."]},{"id":"08","theme":"Success","title":"Recipe for success","lines":["Stay quiet while it's working","Let them call it luck","You'll know it was a thousand Tuesdays"]},{"id":"09","theme":"Discipline","title":"The guest","lines":["Discipline lives here","It does the dishes on the days you don't feel like it","Stop waiting for the guest"]},{"id":"10","theme":"Success","title":"Overnight","lines":["Then they call it overnight","Let them talk","Overnight took six years of nights"]},{"id":"11","theme":"Heartbreak","title":"Reading it right","lines":["It went exactly like them","You just read it with hope","Tonight, read it like a stranger would"]},{"id":"12","theme":"Self-worth","title":"The discount","lines":["And you've been charging nothing","Raise your price","Watch who suddenly can't afford you"]},{"id":"13","theme":"Discipline","title":"Future you","lines":["Tired of nobody noticing","Future you is smiling right now","Because they know you didn't quit"]},{"id":"14","theme":"Heartbreak","title":"The first call","lines":["So tell someone else","Then someone else again","One day they won't even be second"]},{"id":"15","theme":"Self-worth","title":"Age seven","lines":["Every \"I'm so stupid\"","Every \"I'm not enough\"","She's still listening"]},{"id":"16","theme":"Success","title":"The quiet year","lines":["They'll ask where you went","Don't explain","Let them find out with everyone else"]},{"id":"17","theme":"Heartbreak","title":"Almost","lines":["Because you finish their sentences","Stop finishing them","Almost is just a polite no"]},{"id":"18","theme":"Discipline","title":"Kept promises","lines":["Each one teaches you something","That your word means nothing","Confidence is just promises kept"]},{"id":"19","theme":"Self-worth","title":"Who goes quiet","lines":["Some are just keeping score","Keep winning anyway","Their silence is the loudest applause"]},{"id":"20","theme":"Self-worth","title":"3 a.m. lies","lines":["Here's what 3 a.m. won't tell you","You've survived every single one","Including this one"]},{"id":"21","theme":"Heartbreak","title":"Done loving alone","lines":["It still wasn't enough to keep you","I'm not sorry I loved you","I'm just done loving for two"]},{"id":"22","theme":"Heartbreak","title":"My fingers remember","lines":["My fingers still remember it","Healing isn't a straight line","Some nights it still leads back to you"]},{"id":"23","theme":"Love","title":"Staying","lines":["Some days leaving looks easier","But easy was never the promise","Staying is the love story nobody films"]},{"id":"24","theme":"Heartbreak","title":"The porch light","lines":["So you never had to hurry home","Tonight I turned it off","Not to punish you, just to sleep"]},{"id":"25","theme":"Heartbreak","title":"Your side","lines":["And I'm still not okay","I still sleep on my side of the bed","Like your side is still yours"]},{"id":"26","theme":"Love","title":"What it costs","lines":["People call that losing yourself","I call it choosing you","What costs nothing is worth nothing"]},{"id":"27","theme":"Discipline","title":"Luck","lines":["And they'll call it luck","Let them","Luck doesn't wake up at 5 a.m."]},{"id":"28","theme":"Self-worth","title":"Your circle","lines":["Then notice who still calls","That's your circle","Everyone else was an audience"]},{"id":"29","theme":"Self-worth","title":"Stopped bending","lines":["Now you have boundaries","And suddenly you've \"changed\"","You just stopped bending"]},{"id":"30","theme":"Success","title":"Someday","lines":["Someday you'll say what you mean","Someday isn't on any calendar","Today is"]}];
-const LIT0 = ["20","01","08","24","15","27","11","29","05"];
+// THOUGHTS (from thoughts.js): every thought in the book, {id, title, theme, chapter, lines}.
+// The building has 30 apartments. Each night (it turns over at 3 a.m. local time) a different
+// set of thoughts moves in, and one of them is tonight's window.
+const ALL = window.THOUGHTS || [];
+const CHAPTERS = window.CHAPTER_ORDER || [...new Set(ALL.map(p => p.chapter))];
+const byId = Object.fromEntries(ALL.map(p => [p.id, p]));
+const FLOORS = 6, UNITS = "ABCDE", SLOTS = FLOORS * 5;
 const facade = document.getElementById('facade');
-const units = "ABCDE";
-const wins = {};
-let cur = null;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const narrow = () => matchMedia('(max-width: 859px)').matches;
 const blinds = [0,40,0,65,0,20,0,0,55,0,30,0,0,70,0,0,45,0,0,25,0,60,0,0,35,0,0,50,0,15];
+const $ = id => document.getElementById(id);
 
-for (let f = 0; f < 6; f++) {
+// --- seeded randomness, so everyone sees the same building on the same night
+const nightKey = (() => { const d = new Date(Date.now() - 3 * 3600e3); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; })();
+function rng(seedStr) {
+  let h = 1779033703 ^ seedStr.length;
+  for (let i = 0; i < seedStr.length; i++) { h = Math.imul(h ^ seedStr.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+  return () => { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
+}
+const shuffle = (arr, r) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+// --- build the 30 apartments
+const slots = [];   // {el, floorEl, apt, poem}
+for (let f = 0; f < FLOORS; f++) {
   const row = document.createElement('div');
   row.className = 'floor';
-  const floorNo = 6 - f;
+  const floorNo = FLOORS - f;
   row.innerHTML = `<span class="fl" aria-hidden="true">${floorNo}F</span>`;
   for (let u = 0; u < 5; u++) {
-    const i = f * 5 + u, p = POEMS[i];
-    p.apt = floorNo + units[u];
+    const i = f * 5 + u;
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'win';
-    b.id = 'w' + p.id;
     b.style.setProperty('--blind', blinds[i] + '%');
-    b.setAttribute('aria-label', `Apartment ${p.apt}: ${p.title}`);
-    b.innerHTML = `<img src="img/${p.id}.jpg" alt="" loading="${f < 3 ? 'eager' : 'lazy'}" decoding="async">`;
-    b.addEventListener('click', () => open(p, true));
+    b.innerHTML = `<img alt="" decoding="async">`;
+    const slot = {el: b, floorEl: row, apt: floorNo + UNITS[u], poem: null};
+    b.addEventListener('click', () => { if (slot.poem) open(slot, true); });
     row.appendChild(b);
-    wins[p.id] = b;
+    slots.push(slot);
   }
   facade.appendChild(row);
 }
+const car = document.createElement('div');
+car.className = 'car';
+car.setAttribute('aria-hidden', 'true');
+facade.appendChild(car);
 
-const litCount = () => document.querySelectorAll('.win.on').length;
-function updateCount() {
-  const n = litCount();
-  document.getElementById('lit').textContent = n;
-  if (n === POEMS.length) {
-    document.getElementById('hint-text').innerHTML = 'Every light is on. The whole building is in <a href="#lobby">the book downstairs</a>.';
-    document.getElementById('all').hidden = true;
+let cur = null, tonight = null, filter = '';
+
+function setTenant(slot, p) {
+  slot.poem = p;
+  const b = slot.el;
+  b.classList.remove('on', 'cur', 'flick', 'tonight');
+  b.querySelector('.tag')?.remove();
+  b.classList.toggle('vacant', !p);
+  b.disabled = !p;
+  b.setAttribute('aria-pressed', 'false');
+  const img = b.querySelector('img');
+  if (p) {
+    img.src = `img/${p.id}.jpg`;
+    img.hidden = false;
+    b.setAttribute('aria-label', `Apartment ${slot.apt}: ${p.title}`);
+    if (tonight && p.id === tonight.id) {
+      b.classList.add('tonight');
+      b.insertAdjacentHTML('beforeend', '<span class="tag">Tonight</span>');
+    }
+  } else {
+    img.removeAttribute('src');
+    img.hidden = true;
+    b.setAttribute('aria-label', `Apartment ${slot.apt}: empty`);
   }
 }
-function light(id, animate) {
-  const w = wins[id];
-  if (w.classList.contains('on')) return;
+const slotOf = id => slots.find(s => s.poem && s.poem.id === id);
+
+function light(slot, animate) {
+  const w = slot.el;
+  if (!slot.poem || w.classList.contains('on')) return;
   w.classList.add('on');
   w.setAttribute('aria-pressed', 'true');
   if (animate && !reduce) { w.classList.remove('flick'); void w.offsetWidth; w.classList.add('flick'); }
 }
-function open(p, fromTap) {
-  light(p.id, fromTap);
-  if (cur) cur.classList.remove('cur');
-  cur = wins[p.id]; cur.classList.add('cur');
-  document.getElementById('n-img').src = `img/${p.id}.jpg`;
-  document.getElementById('n-apt').textContent = `Apt ${p.apt} · ${p.theme}`;
-  document.getElementById('n-title').textContent = p.title;
-  const ul = document.getElementById('n-lines');
+function updateCount() {
+  const n = slots.filter(s => s.el.classList.contains('on')).length;
+  const occupied = slots.filter(s => s.poem).length;
+  $('lit').textContent = n;
+  const all = n === occupied;
+  $('all').hidden = all;
+  $('hint-text').innerHTML = all && filter
+    ? `Every ${filter.split(' & ')[0].toLowerCase()} window is lit. The rest of the building is in <a href="#lobby">the book downstairs</a>.`
+    : all
+    ? 'Every light is on. The whole building is in <a href="#lobby">the book downstairs</a>.'
+    : 'Tap another dark window to read its thought.';
+}
+
+function open(slot, fromTap) {
+  const p = slot.poem;
+  light(slot, fromTap);
+  if (cur) cur.el.classList.remove('cur');
+  cur = slot; slot.el.classList.add('cur');
+  $('n-img').src = `img/${p.id}.jpg`;
+  $('n-apt').textContent = `Apt ${slot.apt} · ${p.theme}`;
+  $('n-title').textContent = p.title;
+  const ul = $('n-lines');
   ul.innerHTML = '';
   p.lines.forEach(l => { const li = document.createElement('li'); li.textContent = l; ul.appendChild(li); });
+  $('share-msg').textContent = '';
+  $('share-url')?.remove();
   updateCount();
-  if (fromTap && matchMedia('(max-width: 859px)').matches) {
-    const r = document.getElementById('note').getBoundingClientRect();
-    if (r.top > innerHeight - 120) document.getElementById('note').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'});
+  if (fromTap && narrow()) {
+    const r = $('note').getBoundingClientRect();
+    if (r.top > innerHeight - 120) $('note').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'});
   }
 }
 
-document.getElementById('all').addEventListener('click', () => {
-  const dark = POEMS.filter(p => !wins[p.id].classList.contains('on'));
+// --- fill the building: tonight's tenants, or one chapter's thoughts
+function fill(pool, seed, keep) {
+  const r = rng(seed);
+  let picks = shuffle(pool, r).slice(0, SLOTS);
+  if (keep && !picks.includes(keep)) picks[picks.length < SLOTS ? picks.length : SLOTS - 1] = keep;
+  // spread the tenants across the building when there are fewer thoughts than apartments
+  const order = shuffle(slots.map((_, i) => i), r);
+  slots.forEach(s => setTenant(s, null));
+  picks.forEach((p, k) => setTenant(slots[order[k]], p));
+  const occupied = slots.filter(s => s.poem);
+  return occupied;
+}
+
+function setFilter(ch, fromUser) {
+  filter = ch;
+  document.querySelectorAll('[data-ch]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.ch === ch)));
+  const pool = ch ? ALL.filter(p => p.chapter === ch) : ALL;
+  const keep = !ch || (tonight && tonight.chapter === ch) ? tonight : null;
+  const occupied = fill(pool, nightKey + '|' + ch, keep);
+  // a chapter lights all its windows; the full building starts with a few lights on
+  (ch ? occupied : shuffle(occupied, rng(nightKey)).slice(0, 9)).forEach(s => light(s, !!fromUser));
+  const first = (keep && slotOf(keep.id)) || slots.find(s => s.el.classList.contains('on')) || slots.find(s => s.poem);
+  if (first) open(first, false);
+  updateCount();
+  if (fromUser) document.querySelector('.building').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+}
+
+// --- the elevator: rides to a random floor and opens a random thought there
+let riding = false;
+function ride() {
+  if (riding) return;
+  const pool = filter ? ALL.filter(p => p.chapter === filter) : ALL;
+  const shown = cur && cur.poem ? cur.poem.id : null;
+  const choices = pool.filter(p => p.id !== shown);
+  if (!choices.length) return;
+  const p = choices[Math.floor(Math.random() * choices.length)];
+  let slot = slotOf(p.id);
+  if (!slot) {
+    const dark = slots.filter(s => !s.el.classList.contains('on') && !(tonight && s.poem && s.poem.id === tonight.id));
+    const vacant = slots.filter(s => !s.poem);
+    const spots = vacant.length ? vacant : dark.length ? dark : slots.filter(s => s !== cur);
+    slot = spots[Math.floor(Math.random() * spots.length)];
+    setTenant(slot, p);
+  }
+  riding = true;
+  $('lift').disabled = true;
+  const arrive = () => {
+    slots.forEach(s => s.floorEl.classList.remove('at'));
+    slot.floorEl.classList.add('at');
+    $('lift-disp').textContent = slot.apt.slice(0, -1) + 'F';
+    open(slot, true);
+    setTimeout(() => { car.classList.remove('go'); slot.floorEl.classList.remove('at'); riding = false; $('lift').disabled = false; }, reduce ? 0 : 900);
+  };
+  if (narrow()) document.querySelector('.building').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'});
+  if (reduce) return arrive();
+  // start at the ground floor, ride up, ticking the display as floors pass
+  car.style.transition = 'none';
+  car.style.top = facade.offsetHeight + 'px';
+  car.style.height = slot.floorEl.offsetHeight + 'px';
+  car.classList.add('go');
+  void car.offsetWidth;
+  car.style.transition = '';
+  const delay = narrow() ? 450 : 0;
+  setTimeout(() => {
+    car.style.top = slot.floorEl.offsetTop + 'px';
+    const target = +slot.apt.slice(0, -1);
+    let f = 0;
+    const tick = setInterval(() => { f++; $('lift-disp').textContent = Math.min(f, target) + 'F'; if (f >= target) clearInterval(tick); }, 1300 / target);
+    setTimeout(arrive, 1350);
+  }, delay);
+}
+
+// --- share a window: a link that opens this thought
+async function share() {
+  const p = cur && cur.poem;
+  if (!p) return;
+  const url = location.origin + location.pathname + '#t' + p.id;
+  const msg = $('share-msg');
+  if (navigator.share) {
+    try { await navigator.share({title: `${p.title} · 3AM Reruns`, text: p.lines.join('\n'), url}); return; } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; return; } catch (e) {}
+  msg.textContent = 'Copy this link:';
+  let box = $('share-url');
+  if (!box) { box = document.createElement('input'); box.id = 'share-url'; box.className = 'share-url'; box.readOnly = true; $('share-msg').after(box); }
+  box.value = url; box.focus(); box.select();
+}
+
+function openFromHash() {
+  const m = /^#t(\w+)$/.exec(location.hash);
+  const p = m && byId[m[1]];
+  if (!p) return false;
+  if (filter && p.chapter !== filter) setFilter('', false);
+  let slot = slotOf(p.id);
+  if (!slot) {
+    const spots = slots.filter(s => !s.poem || (!s.el.classList.contains('on') && s.poem !== tonight));
+    slot = spots[Math.floor(Math.random() * spots.length)] || slots[0];
+    setTenant(slot, p);
+  }
+  open(slot, true);
+  document.querySelector('.building').scrollIntoView({block: narrow() ? 'center' : 'start'});
+  return true;
+}
+
+// --- controls
+const moods = document.querySelector('.moods');
+const boardRows = $('board-rows');
+CHAPTERS.forEach(ch => {
+  const short = ch.split(' & ')[0];
+  moods.insertAdjacentHTML('beforeend', `<button class="mood" type="button" data-ch="${ch}" aria-pressed="false">${short}</button>`);
+  boardRows.insertAdjacentHTML('beforeend', `<button class="row pick" type="button" data-ch="${ch}" aria-pressed="false"><span>${ch.replace('&', '&amp;')}</span><span>Light it up</span></button>`);
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-ch]');
+  if (b) setFilter(b.dataset.ch === filter && b.classList.contains('pick') ? '' : b.dataset.ch, true);
+});
+$('lift').addEventListener('click', ride);
+$('share').addEventListener('click', share);
+$('tonight-btn').addEventListener('click', () => {
+  if (filter && tonight.chapter !== filter) setFilter('', false);
+  const s = slotOf(tonight.id);
+  if (s) { open(s, true); if (narrow()) document.querySelector('.building').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); }
+});
+$('all').addEventListener('click', () => {
+  const dark = slots.filter(s => s.poem && !s.el.classList.contains('on'));
   let delay = 0;
-  if (matchMedia('(max-width: 859px)').matches) {
+  if (narrow()) {
     document.querySelector('.building').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
     delay = reduce ? 0 : 600;
   }
-  dark.forEach((p, k) => setTimeout(() => { light(p.id, true); updateCount(); }, delay + (reduce ? 0 : k * 90)));
+  dark.forEach((s, k) => setTimeout(() => { light(s, true); updateCount(); }, delay + (reduce ? 0 : k * 90)));
 });
 document.addEventListener('click', e => {
   if (!e.target.closest('a[href="#lobby"]')) return;
   e.preventDefault();
-  document.getElementById('lobby').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+  $('lobby').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
 });
-Object.values(wins).forEach(w => w.setAttribute('aria-pressed', 'false'));
-LIT0.forEach(id => light(id, false));
-open(POEMS.find(p => p.id === '20'), false);
+addEventListener('hashchange', openFromHash);
 
-
+// --- first frame: tonight's building, tonight's window open
+if (ALL.length) {
+  tonight = ALL[Math.floor(rng('tonight|' + nightKey)() * ALL.length)];
+  setFilter('', false);
+  $('tonight-apt').textContent = slotOf(tonight.id).apt;
+  openFromHash();
+}
 
 (function backdrop(){
   const bd = document.getElementById('backdrop');
